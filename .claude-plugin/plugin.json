@@ -1,0 +1,18 @@
+{
+  "name": "skills-plugin-template",
+  "version": "1.0.0",
+  "description": "TEMPLATE: replace with a description of this plugin. List skill domains, trigger phrases, and the MCP servers the skills use.",
+  "author": {
+    "name": "Kanopi Studios",
+    "email": "code@kanopi.com",
+    "url": "https://kanopi.com"
+  },
+  "license": "REPLACE-ME",
+  "keywords": [
+    "claude-code",
+    "agent-skills",
+    "kanopi"
+  ],
+  "repository": "https://github.com/kanopi/skills-plugin-template",
+  "homepage": "https://github.com/kanopi/skills-plugin-template"
+}

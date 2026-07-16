@@ -1,0 +1,21 @@
+name = "example-specialist"
+description = "EXAMPLE — delete this agent when adopting the template (plugins with no agents delete the whole agents/ directory; the test suite skips agent tests when it is absent). A real description states the agent's domain, when to spawn it proactively, and its trigger phrases."
+model = "claude-sonnet-4-6"
+
+developer_instructions = """
+# Example Specialist Agent
+
+This agent exists so the template's own CI runs green end-to-end, including
+the codex-parity check against agents/example-specialist/AGENT.md.
+
+## Core Responsibilities
+
+- Demonstrate the .codex/agents/<name>.toml translation convention: every
+  agent directory has a matching TOML file whose name and description stay
+  in sync with the AGENT.md frontmatter (enforced by
+  scripts/check-codex-parity.sh)
+
+The developer_instructions body is the Codex translation of the AGENT.md
+body — regenerate it whenever the AGENT.md changes materially. Parity of
+name and description is machine-checked; body parity is by convention.
+"""

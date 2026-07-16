@@ -1,0 +1,13 @@
+{
+  "$comment": "Routing eval cases for scripts/run-evals.js. Each case is a realistic user prompt plus the skill that should win the TF-IDF ranking against every skill description in this repo. Populate with 2-5 prompts per skill, including paraphrases that do NOT reuse the description's exact wording. CI enforces a rank-1 floor (see .github/workflows/test.yml).",
+  "prompts": [
+    {
+      "prompt": "run the demo workflow to example the widget for me",
+      "expect": "example-skill"
+    },
+    {
+      "prompt": "show me how the example template skill demonstrates frontmatter and routing evals",
+      "expect": "example-skill"
+    }
+  ]
+}

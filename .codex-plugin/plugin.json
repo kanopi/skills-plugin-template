@@ -1,0 +1,22 @@
+{
+  "name": "skills-plugin-template",
+  "version": "1.0.0",
+  "description": "TEMPLATE: replace with a description of this plugin. Works in Claude Code, Claude Desktop, and OpenAI Codex.",
+  "author": {
+    "name": "Kanopi Studios",
+    "email": "code@kanopi.com",
+    "url": "https://kanopi.com"
+  },
+  "homepage": "https://github.com/kanopi/skills-plugin-template",
+  "repository": "https://github.com/kanopi/skills-plugin-template",
+  "license": "REPLACE-ME",
+  "keywords": ["kanopi", "codex"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Skills Plugin Template",
+    "shortDescription": "TEMPLATE: one-line description shown in plugin UIs",
+    "developerName": "Kanopi Studios",
+    "category": "Development",
+    "websiteURL": "https://github.com/kanopi/skills-plugin-template"
+  }
+}

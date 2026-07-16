@@ -16,15 +16,13 @@
 //   node scripts/run-evals.js --min-rank1 75          # fail if <75% of prompts rank their skill #1
 //   node scripts/run-evals.js --collision-threshold 0.75
 //   node scripts/run-evals.js --fail-on-collision     # collisions become errors, not warnings
+//   node scripts/run-evals.js --root /path/to/repo    # eval another repo's skills/
+//   node scripts/run-evals.js --collisions-only       # skip routing (no prompts file needed)
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
-
-const ROOT = path.resolve(__dirname, '..');
-const SKILLS_DIR = path.join(ROOT, 'skills');
-const PROMPTS_FILE = path.join(ROOT, 'evals', 'routing-prompts.json');
 
 // --- CLI args ---------------------------------------------------------------
 
@@ -37,6 +35,11 @@ function argValue(flag, fallback) {
 const MIN_RANK1 = argValue('--min-rank1', null); // percentage, e.g. "75"
 const COLLISION_THRESHOLD = parseFloat(argValue('--collision-threshold', '0.75'));
 const FAIL_ON_COLLISION = args.includes('--fail-on-collision');
+const COLLISIONS_ONLY = args.includes('--collisions-only');
+
+const ROOT = path.resolve(argValue('--root', path.resolve(__dirname, '..')));
+const SKILLS_DIR = path.join(ROOT, 'skills');
+const PROMPTS_FILE = path.join(ROOT, 'evals', 'routing-prompts.json');
 
 // --- Frontmatter description extraction -------------------------------------
 
@@ -187,6 +190,10 @@ if (collisions.length === 0) {
 }
 
 // --- Routing eval --------------------------------------------------------------
+
+if (COLLISIONS_ONLY) {
+  process.exit(failures > 0 ? 1 : 0);
+}
 
 console.log('== Trigger-routing eval ==');
 if (!fs.existsSync(PROMPTS_FILE)) {

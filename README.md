@@ -26,6 +26,7 @@ template is **not** a submodule; each plugin owns its copy.
 | `scripts/validate-frontmatter.sh` | Frontmatter presence, YAML validity, name/directory parity, openai.yaml policy |
 | `scripts/run-evals.js` | TF-IDF trigger-routing eval + description-collision detection (no dependencies, Node 18+) |
 | `scripts/check-codex-parity.sh` | `.codex/agents/*.toml` and `openai.yaml` drift detection against SKILL.md/AGENT.md |
+| `scripts/run-behavioral-evals.sh` | Behavioral eval harness — headless `claude -p` runs in disposable fixture repos, graded deterministically (see `evals/cases/README.md`) |
 | `scripts/package-plugin.sh` | Full plugin zip for Claude Desktop's "Add plugin" UI |
 | `scripts/package-skills.sh` | Per-skill `.skill` zips + bundle for Chat/CoWork |
 
@@ -59,6 +60,28 @@ node scripts/run-evals.js --fail-on-collision     # strict collision mode
 - The collision check flags description pairs ≥75% similar — near-duplicate
   descriptions make model-side skill routing unreliable. Differentiate
   trigger phrases and scope boundaries instead of raising the threshold.
+
+### Behavioral evals
+
+Routing evals test whether the right skill triggers; behavioral evals test
+what a skill **does** once active — confirmation gates holding under
+pressure, refusal to fabricate, files actually written. Cases live in
+`evals/cases/*.json`, fixture repo blueprints in `evals/fixtures/`, and
+`scripts/run-behavioral-evals.sh` runs them headlessly through the `claude`
+CLI and grades the trace deterministically:
+
+```bash
+./scripts/run-behavioral-evals.sh --check   # static validation (in bats, free)
+./scripts/run-behavioral-evals.sh --smoke   # smoke subset (real API calls)
+./scripts/run-behavioral-evals.sh           # full suite (real API calls)
+```
+
+Runs cost tokens (haiku by default, per-case turn + budget caps, tally
+printed). They never run per-push — CI runs the smoke subset on
+`workflow_dispatch` and a weekly schedule only. Schema, safety model, and
+authoring rules: `evals/cases/README.md`. Every side-effect skill should
+ship at least one gate case and one pressure case; a failing case is a
+skill bug — fix the skill, not the test.
 
 ## Adopting the template (clone and detach)
 

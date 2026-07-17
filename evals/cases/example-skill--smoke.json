@@ -1,0 +1,13 @@
+{
+  "name": "example-skill--smoke",
+  "skill": "example-skill",
+  "fixture": "plain-git-repo",
+  "prompt": "Run the example demo workflow from the example skill in this repo.",
+  "max_turns": 3,
+  "smoke": true,
+  "allowed_tools_extra": ["Write"],
+  "expectations": [
+    { "type": "output_matches", "pattern": "EXAMPLE DEMO READY FOR APPROVAL" },
+    { "type": "file_not_created", "pattern": "demo-output.txt" }
+  ]
+}

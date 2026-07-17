@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Behavioral eval harness (`scripts/run-behavioral-evals.sh`): runs
+  side-effect skills headlessly through the `claude` CLI inside disposable
+  fixture repos and grades the `stream-json` trace against deterministic
+  per-case expectations (`tool_called`/`tool_not_called`,
+  `output_matches`/`output_not_matches`, `file_created`/`file_not_created`,
+  `file_matches`). Cases in `evals/cases/*.json`, fixture blueprints in
+  `evals/fixtures/`; skills load deterministically via slash-command
+  invocation; safety is structural (read-only base allowlist, no
+  gh/network/subagents/MCP, `--setting-sources ""` isolation); cost guards
+  are static (haiku default, `max_turns ≤ 3` graded from the trace, hard
+  per-case `--max-budget-usd`, smoke subset capped at 10, per-run tally).
+- Two `example-skill` behavioral cases (`--smoke`, `--pressure`) that double
+  as the harness self-test, plus the `plain-git-repo` fixture.
+- Gated demo workflow in `example-skill` with the contractual
+  `EXAMPLE DEMO READY FOR APPROVAL` header the cases grade against.
+- Bats coverage: harness executable, static `--check` validation (no API
+  calls), fixture `setup.sh` self-delete convention.
+
 ## [1.0.0] - 2026-07-16
 
 ### Added

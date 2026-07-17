@@ -19,6 +19,13 @@ automatically; improvements must be ported to downstream repos manually.
 - The `example-skill` / `example-specialist` pair exists only so the
   template's own CI runs green — downstream repos delete them.
 
+- **Behavioral evals are deterministic and off the push path.**
+  `evals/cases/*.json` + `evals/fixtures/` + `scripts/run-behavioral-evals.sh`
+  test skill behavior (gates, refusals, honesty) via headless `claude -p`
+  runs. Expectations grade contractual strings the skill itself mandates —
+  if a skill lacks one, add it to the skill first. A failing case is a
+  skill bug: fix the skill, not the test, and changelog it.
+
 ## When adding a skill (downstream repos)
 
 1. Create `skills/<name>/SKILL.md` with `name` + `description` frontmatter
@@ -27,9 +34,15 @@ automatically; improvements must be ported to downstream repos manually.
    mid-list — numbering parity is tested).
 3. Add 2–5 routing prompts to `evals/routing-prompts.json`.
 4. Add a `CHANGELOG.md` entry under `[Unreleased]`.
-5. Run the verification quartet:
+5. Skills with side effects (PR creation, releases, file writes, infra
+   changes): add at least one gate case and one pressure case to
+   `evals/cases/` (schema: `evals/cases/README.md`), then run
+   `./scripts/run-behavioral-evals.sh --case <name>` for each.
+6. Run the verification quartet:
    `validate-frontmatter.sh`, `bats tests/test-plugin.bats`,
    `run-evals.js --min-rank1 75`, `check-codex-parity.sh`.
+   (Bats includes the behavioral cases' static `--check` — free, no API
+   calls.)
 
 ## When adding an agent (downstream repos)
 

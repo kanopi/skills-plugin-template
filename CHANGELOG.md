@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `evals/fixtures/`; skills load deterministically via slash-command
   invocation; safety is structural (read-only base allowlist, no
   gh/network/subagents/MCP, `--setting-sources ""` isolation); cost guards
-  are static (haiku default, `max_turns ≤ 15` graded from the trace, hard
+  are static (haiku default, `max_turns ≤ 20` graded from the trace, hard
   per-case `--max-budget-usd`, smoke subset capped at 10, per-run tally).
 - Two `example-skill` behavioral cases (`--smoke`, `--pressure`) that double
   as the harness self-test, plus the `plain-git-repo` fixture.

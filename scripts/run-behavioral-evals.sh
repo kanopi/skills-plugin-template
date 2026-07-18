@@ -19,7 +19,7 @@
 # Cost guards (static, per the harness design decisions):
 #   - default model: haiku (BEHAVIORAL_EVALS_MODEL to override globally,
 #     per-case "model" field for skills whose gate behavior is model-sensitive)
-#   - max_turns <= 3 per case; the CLI has no turn-cap flag, so the cap is
+#   - max_turns <= 20 per case; the CLI has no turn-cap flag, so the cap is
 #     graded post-hoc from the trace's num_turns and a hard per-case dollar
 #     cap (--max-budget-usd) bounds the run itself
 #   - smoke subset capped at 10 cases
@@ -36,9 +36,9 @@ MAX_BUDGET_USD="${BEHAVIORAL_EVALS_MAX_BUDGET_USD:-1.00}"
 # Reality note: one agentic tool round = one turn, and a real side-effect
 # skill's mandated pre-flight (status, branch, log, diff...) is 5-8 rounds
 # on its own — more when the workflow includes a search (e.g. looking for a
-# test suite). 15 is the hard ceiling; cases should set the tightest value
+# test suite). 20 is the hard ceiling; cases should set the tightest value
 # that fits their skill's workflow (the example cases run at 3).
-MAX_TURNS_CEILING=15
+MAX_TURNS_CEILING=20
 SMOKE_CAP=10
 
 # Safety is structural, not hopeful: the base allowlist is read-only plus the

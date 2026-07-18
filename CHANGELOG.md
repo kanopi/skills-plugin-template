@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-18
+
 ### Added
 
 - Behavioral eval harness (`scripts/run-behavioral-evals.sh`): runs
@@ -26,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `EXAMPLE DEMO READY FOR APPROVAL` header the cases grade against.
 - Bats coverage: harness executable, static `--check` validation (no API
   calls), fixture `setup.sh` self-delete convention.
+- `.github/workflows/behavioral-evals.yml` — runs the smoke subset on
+  `workflow_dispatch` (with a full-suite option) and a weekly schedule,
+  authenticated via the `ANTHROPIC_API_KEY` secret. Behavioral evals
+  never run per-push; the fast quartet remains the per-push gate.
 
 ## [1.0.0] - 2026-07-16
 

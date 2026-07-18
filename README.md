@@ -43,6 +43,9 @@ no per-repo edits needed.
   codex parity + secret scan + JSON/YAML validation
 - `.github/workflows/release-artifacts.yml` — attaches plugin zip and
   `.skill` files to GitHub releases
+- `.github/workflows/behavioral-evals.yml` — behavioral evals (smoke
+  subset) on `workflow_dispatch` + weekly schedule; needs the
+  `ANTHROPIC_API_KEY` secret. Never runs per-push.
 
 ### Routing evals
 

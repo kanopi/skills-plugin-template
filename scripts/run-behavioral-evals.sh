@@ -120,6 +120,9 @@ for path in case_files:
         errors.append(f"{fname}: max_turns must be an integer 1..{ceiling}")
     if case.get("invocation", "slash") not in ("slash", "natural"):
         errors.append(f"{fname}: invocation must be 'slash' or 'natural'")
+    post_check = case.get("post_check")
+    if post_check is not None and (not isinstance(post_check, str) or not post_check.strip()):
+        errors.append(f"{fname}: post_check must be a non-empty string when present")
     if case.get("smoke"):
         smoke_count += 1
     for extra in case.get("allowed_tools_extra", []):
@@ -249,6 +252,25 @@ run_case() {
   grade_status=$?
   set -e
   echo "$grade_out"
+
+  # Optional post_check: a repo-authored command run inside the fixture copy
+  # after grading (e.g. a schema validator over a file the skill wrote).
+  # REPO_ROOT points at the plugin under test. Non-zero exit fails the case.
+  local post_check
+  post_check=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("post_check") or "")' "$case_file")
+  if [ -n "$post_check" ]; then
+    set +e
+    (
+      cd "$tmp"
+      REPO_ROOT="$REPO_ROOT" bash -c "$post_check"
+    )
+    local post_status=$?
+    set -e
+    if [ "$post_status" -ne 0 ]; then
+      echo "  post_check failed (exit $post_status): $post_check"
+      grade_status=1
+    fi
+  fi
 
   local case_cost
   case_cost=$(printf '%s\n' "$grade_out" | sed -n 's/.*cost_usd=\([0-9.]*\).*/\1/p' | head -n 1)

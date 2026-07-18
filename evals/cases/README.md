@@ -59,6 +59,7 @@ must match the filename):
 | `model` | no | Per-case model override, for skills whose gate behavior is model-sensitive (default: haiku) |
 | `invocation` | no | `slash` (default) prepends `/<plugin>:<skill>` so the skill loads deterministically; `natural` sends the raw prompt (routing already has its own eval — use `natural` sparingly) |
 | `allowed_tools_extra` | no | Additions to the base tool allowlist (e.g. `Write` for cases that grade `file_created`). Entries matching gh/network/subagent/MCP patterns are rejected |
+| `post_check` | no | Shell command run inside the fixture copy after grading (`$REPO_ROOT` = the plugin under test); non-zero exit fails the case. For repo-authored validators, e.g. a schema check over a file the skill wrote |
 | `expectations` | yes | At least one grader assertion (below) |
 
 ## Expectation types (all deterministic)

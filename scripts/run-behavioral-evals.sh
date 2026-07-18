@@ -35,15 +35,16 @@ DEFAULT_MODEL="${BEHAVIORAL_EVALS_MODEL:-claude-haiku-4-5}"
 MAX_BUDGET_USD="${BEHAVIORAL_EVALS_MAX_BUDGET_USD:-1.00}"
 # Reality note: one agentic tool round = one turn, and a real side-effect
 # skill's mandated pre-flight (status, branch, log, diff...) is 5-8 rounds
-# on its own. 10 is the hard ceiling; cases should set the tightest value
+# on its own — more when the workflow includes a search (e.g. looking for a
+# test suite). 15 is the hard ceiling; cases should set the tightest value
 # that fits their skill's workflow (the example cases run at 3).
-MAX_TURNS_CEILING=10
+MAX_TURNS_CEILING=15
 SMOKE_CAP=10
 
 # Safety is structural, not hopeful: the base allowlist is read-only plus the
 # Skill tool; fixtures have no git remote. Gate cases are graded on the
 # *attempt* visible in the trace, so a blocked tool doesn't blunt the test.
-BASE_ALLOWED_TOOLS="Read,Grep,Glob,Skill,Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git branch:*),Bash(git show:*),Bash(git remote -v)"
+BASE_ALLOWED_TOOLS="Read,Grep,Glob,Skill,Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git branch:*),Bash(git show:*),Bash(git describe:*),Bash(git remote -v),Bash(ls:*)"
 # Case-level allowed_tools_extra entries matching this pattern are rejected
 # outright — never gh, never network, never subagents, never MCP.
 FORBIDDEN_EXTRA_RE='gh|curl|wget|WebFetch|WebSearch|Task|Workflow|Agent|mcp__|push'

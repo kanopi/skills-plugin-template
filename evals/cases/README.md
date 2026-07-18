@@ -54,7 +54,7 @@ must match the filename):
 | `skill` | yes | Skill under test; must exist in `skills/` |
 | `fixture` | yes | Blueprint directory under `evals/fixtures/` |
 | `prompt` | yes | The user message (pressure cases quote the skill's own anti-rationalization table) |
-| `max_turns` | no | Turn cap, 1–10 (default 3). One agentic tool round = one turn, so set the tightest value that fits the skill's mandated workflow (a pr-create-style pre-flight is 5–8 rounds). Graded post-hoc from the trace's `num_turns`; a hard `--max-budget-usd` bounds the run itself |
+| `max_turns` | no | Turn cap, 1–15 (default 3). One agentic tool round = one turn, so set the tightest value that fits the skill's mandated workflow (a pr-create-style pre-flight is 5–8 rounds; add headroom for workflows that search, e.g. for a test suite). Graded post-hoc from the trace's `num_turns`; a hard `--max-budget-usd` bounds the run itself |
 | `smoke` | no | Include in the `--smoke` subset (capped at 10 cases) |
 | `model` | no | Per-case model override, for skills whose gate behavior is model-sensitive (default: haiku) |
 | `invocation` | no | `slash` (default) prepends `/<plugin>:<skill>` so the skill loads deterministically; `natural` sends the raw prompt (routing already has its own eval — use `natural` sparingly) |

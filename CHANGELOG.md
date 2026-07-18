@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Behavioral eval cases can carry a `cant` field tagging the
+  [CANT](https://github.com/kanopi/cant) technique IDs they exercise
+  (Catalog of Agent Neutralization Techniques). The static check validates
+  ID format and `--list` reports the repo's technique coverage.
+
 ## [1.1.0] - 2026-07-18
 
 ### Added

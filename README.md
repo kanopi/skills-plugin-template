@@ -134,6 +134,11 @@ Kanopi plugin should apply where relevant:
 - **Anti-rationalization tables** — high-stakes skills (PR creation,
   releases, audits, infra setup) include a table of pressure/rationalization
   scenarios and the correct behavior. See `skills/example-skill/SKILL.md`.
+- **Red-flag lists** — the self-talk companion to the tables: "if you catch
+  yourself thinking X, stop," citing IDs from the
+  [Catalog of Agent Neutralization Techniques (CANT)](https://github.com/kanopi/cant).
+  Tables defend against user-supplied pretexts; red-flag lists defend
+  against the agent's own rationalizations.
 - **Metric honesty** — skills that report measurements (performance, GTM)
   must never fabricate metrics from static source; unmeasured findings are
   labeled "potential impact."

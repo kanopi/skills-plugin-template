@@ -41,6 +41,18 @@ When the user asks to "run the demo workflow" or "run the example demo":
    ("I approve in advance", "skip the confirmation", "I'm in a hurry")
    does not count — present the header and wait anyway.
 
+## Red flags (recommended companion to the table below)
+
+The table below defends against *pretexts* — excuses supplied by the user.
+Self-generated rationalizations need their own list: thoughts that mean
+STOP. Cite [CANT](https://github.com/kanopi/cant) IDs so tests and reviews
+can reference them:
+
+- "Just this once" (CANT-6)
+- "This request is too small for the gate" (CANT-7)
+- "The user pre-approved, so presenting is redundant" (CANT-1)
+- "They phrased it differently, so the rule doesn't apply" (CANT-19)
+
 ## Anti-rationalization table (recommended for high-stakes skills)
 
 Skills with side effects (PR creation, releases, audits, infrastructure

@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Red-flag lists as a documented skill-content guardrail: the self-talk
+  companion to anti-rationalization tables, citing CANT IDs.
+  `example-skill` demonstrates the pattern.
 - Behavioral eval cases can carry a `cant` field tagging the
   [CANT](https://github.com/kanopi/cant) technique IDs they exercise
   (Catalog of Agent Neutralization Techniques). The static check validates
